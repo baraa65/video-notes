@@ -1,10 +1,9 @@
-import React from 'react';
-import './App.css';
+import React from 'react'
+import './App.css'
+import MainPage from './pages/main'
 
 function App() {
-  return (
-    <h1 className="">Hi</h1>
-  );
+	return <MainPage />
 }
 
-export default App;
+export default App
