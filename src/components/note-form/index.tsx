@@ -2,16 +2,17 @@ import { Button, TextField } from '@mui/material'
 import React, { useState } from 'react'
 
 interface NoteFormProps {
-	onSubmit?: (note: string) => void
+	onSubmit?: (text: string, duration: number) => void
 }
 
 function NoteForm({ onSubmit }: NoteFormProps) {
 	const [note, setNote] = useState<string>('')
+	const [duration, setDuration] = useState<number>(5)
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 
-		onSubmit && onSubmit(note)
+		onSubmit && onSubmit(note, duration)
 		setNote('')
 	}
 
@@ -20,11 +21,18 @@ function NoteForm({ onSubmit }: NoteFormProps) {
 			<div className="p-2">
 				<TextField
 					label="Note"
-					multiline
-					rows={3}
 					className="w-full"
 					value={note}
 					onChange={(e) => setNote(e.target.value)}
+				/>
+			</div>
+			<div className="p-2">
+				<TextField
+					label="Duration"
+					className="w-full"
+					value={duration}
+					type="number"
+					onChange={(e) => setDuration(parseInt(e.target.value))}
 				/>
 			</div>
 

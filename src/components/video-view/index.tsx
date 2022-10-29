@@ -1,5 +1,4 @@
-import React, { useContext } from 'react'
-import { MainContext } from '../../pages/main/contexts'
+import React from 'react'
 
 interface VideoViewProps {
 	video: File | null
