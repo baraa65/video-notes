@@ -12,6 +12,7 @@ function NoteForm({ onSubmit }: NoteFormProps) {
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 
+		if (!note || duration <= 0) return
 		onSubmit && onSubmit(note, duration)
 		setNote('')
 	}

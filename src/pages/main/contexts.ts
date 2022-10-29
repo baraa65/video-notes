@@ -9,6 +9,7 @@ export interface MainContextType {
 	setVideo: (video: File | null) => void
 	setTime: (time: number) => void
 	addNote: (note: Note) => void
+	setNotes: (notes: Note[]) => void
 }
 
 const context: MainContextType = {
@@ -16,15 +17,10 @@ const context: MainContextType = {
 	time: 0,
 	notes: [],
 
-	setVideo(video: File | null) {
-		this.videoFile = video
-	},
-	setTime(time: number) {
-		this.time = time
-	},
-	addNote(note: Note) {
-		this.notes.push(note)
-	},
+	setVideo(video: File | null) {},
+	setTime(time: number) {},
+	addNote(note: Note) {},
+	setNotes(notes: Note[]) {},
 }
 
 export const MainContext = React.createContext<MainContextType>(context)
