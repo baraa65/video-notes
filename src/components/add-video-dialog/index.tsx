@@ -1,11 +1,12 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 
 import { Button, Dialog, TextField } from '@mui/material'
 import { MainContext } from '../../pages/main/contexts'
 
 function AddVideoDialog() {
-	const { setVideo } = useContext(MainContext)
-	const [open, setOpen] = React.useState(false)
+	const { setVideo, setVideoLink } = useContext(MainContext)
+	const [open, setOpen] = useState(false)
+	const [link, setLink] = useState('')
 
 	const handleClickOpen = () => {
 		setOpen(true)
@@ -19,15 +20,23 @@ function AddVideoDialog() {
 		const file = e.target.files?.[0]
 
 		if (file) {
+			setVideoLink('')
+			setLink('')
 			setVideo(file)
 			handleClose()
 		}
 	}
 
+	const handleDone = () => {
+		setVideo(null)
+		setVideoLink(link)
+		handleClose()
+	}
+
 	return (
 		<>
 			<Button variant="contained" onClick={handleClickOpen}>
-				Open alert dialog
+				Add Video
 			</Button>
 			<Dialog open={open} onClose={handleClose}>
 				<div className="p-6">
@@ -36,11 +45,16 @@ function AddVideoDialog() {
 					</div>
 					<div className="text-xl text-center">--- Or ---</div>
 					<div className="py-2">
-						<TextField label="Link" className="w-full" />
+						<TextField
+							label="Link"
+							className="w-full"
+							value={link}
+							onChange={(e) => setLink(e.target.value)}
+						/>
 					</div>
 
 					<div className="flex justify-end">
-						<Button variant="contained" onClick={handleClose}>
+						<Button variant="contained" onClick={handleDone}>
 							Done
 						</Button>
 					</div>

@@ -2,10 +2,11 @@ import React from 'react'
 
 interface VideoViewProps {
 	video: File | null
+	link: string
 	onTimeUpdate?: (time: number) => void
 }
 
-function VideoView({ video, onTimeUpdate }: VideoViewProps) {
+function VideoView({ video, link, onTimeUpdate }: VideoViewProps) {
 	const handleUpdateTime = (e: React.SyntheticEvent<HTMLVideoElement>) => {
 		onTimeUpdate && onTimeUpdate(e.currentTarget.currentTime)
 	}
@@ -15,6 +16,12 @@ function VideoView({ video, onTimeUpdate }: VideoViewProps) {
 			{video && (
 				<video controls onTimeUpdate={handleUpdateTime} className="w-full">
 					<source src={URL.createObjectURL(video)} />
+				</video>
+			)}
+
+			{link && (
+				<video controls onTimeUpdate={handleUpdateTime} className="w-full">
+					<source src={link} />
 				</video>
 			)}
 		</div>

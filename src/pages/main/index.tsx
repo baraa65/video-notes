@@ -9,12 +9,23 @@ function MainPage() {
 	const [videoFile, setVideo] = useState<File | null>(null)
 	const [time, setTime] = useState<number>(0)
 	const [notes, setNotes] = useState<Note[]>([])
+	const [videoLink, setVideoLink] = useState('')
 
 	const addNote = (note: Note) => {
 		setNotes((notes) => [note, ...notes])
 	}
 
-	const context = { videoFile, setVideo, time, setTime, notes, addNote, setNotes }
+	const context = {
+		videoFile,
+		setVideo,
+		time,
+		setTime,
+		notes,
+		addNote,
+		setNotes,
+		videoLink,
+		setVideoLink,
+	}
 
 	return (
 		<MainContext.Provider value={context}>
@@ -27,7 +38,11 @@ function MainPage() {
 							<NotesSection />
 						</div>
 						<div className="col-span-3">
-							<VideoView video={videoFile} onTimeUpdate={(time) => setTime(time)} />
+							<VideoView
+								video={videoFile}
+								link={videoLink}
+								onTimeUpdate={(time) => setTime(time)}
+							/>
 						</div>
 					</div>
 				</div>
