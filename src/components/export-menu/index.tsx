@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react'
 import { MainContext } from '../../pages/main/contexts'
 import { downloadFile } from '../../utils/download-file'
 import YAML from 'yaml'
+import { jsonToXml } from '../../utils/json-to-xml'
 
 function ExportDialog() {
 	const { notes } = useContext(MainContext)
@@ -29,6 +30,13 @@ function ExportDialog() {
 		downloadFile('notes.yaml', content)
 	}
 
+	const exportAsXml = () => {
+		const xml = jsonToXml({ notes })
+		const content = 'data:text/xml;charset=utf-8,' + encodeURIComponent(xml)
+
+		downloadFile('notes.xml', content)
+	}
+
 	return (
 		<>
 			<div>
@@ -44,7 +52,7 @@ function ExportDialog() {
 				</Button>
 				<Menu id="basic-menu" anchorEl={anchorEl} open={open} onClose={handleClose}>
 					<MenuItem onClick={exportAsJson}>JSON</MenuItem>
-					<MenuItem onClick={handleClose}>XML</MenuItem>
+					<MenuItem onClick={exportAsXml}>XML</MenuItem>
 					<MenuItem onClick={exportAsYaml}>YAML</MenuItem>
 				</Menu>
 			</div>
