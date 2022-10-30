@@ -1,18 +1,10 @@
-import { Button, Menu, MenuItem } from '@mui/material'
-import React, { useContext, useRef, useState } from 'react'
+import { Button } from '@mui/material'
+import React, { useContext, useRef } from 'react'
 import { MainContext } from '../../pages/main/contexts'
 
 function ImportMenu() {
 	const { setNotes } = useContext(MainContext)
 	const input = useRef<HTMLInputElement | null>(null)
-	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
-	const open = Boolean(anchorEl)
-	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-		setAnchorEl(event.currentTarget)
-	}
-	const handleClose = () => {
-		setAnchorEl(null)
-	}
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0]
@@ -38,21 +30,9 @@ function ImportMenu() {
 		<>
 			<div>
 				<input ref={input} style={{ display: 'none' }} type="file" onChange={handleChange} />
-				<Button
-					id="basic-button"
-					aria-controls={open ? 'basic-menu' : undefined}
-					aria-haspopup="true"
-					aria-expanded={open ? 'true' : undefined}
-					variant="contained"
-					onClick={handleClick}
-				>
+				<Button variant="contained" onClick={importFromJson}>
 					Import Notes
 				</Button>
-				<Menu id="basic-menu" anchorEl={anchorEl} open={open} onClose={handleClose}>
-					<MenuItem onClick={importFromJson}>JSON</MenuItem>
-					<MenuItem onClick={handleClose}>XML</MenuItem>
-					<MenuItem onClick={handleClose}>YAML</MenuItem>
-				</Menu>
 			</div>
 		</>
 	)
