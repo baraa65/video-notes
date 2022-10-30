@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react'
 import { Button, Dialog, TextField } from '@mui/material'
 import { MainContext } from '../../pages/main/contexts'
 
+
 function AddVideoDialog() {
 	const { setVideo, setVideoLink } = useContext(MainContext)
 	const [open, setOpen] = useState(false)
