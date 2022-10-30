@@ -42,7 +42,7 @@ function AddVideoDialog() {
 			<Dialog open={open} onClose={handleClose}>
 				<div className="p-6">
 					<div className="py-2">
-						<input type="file" onChange={handleChange} />
+						<input type="file" accept='.mp4,.mkv' onChange={handleChange} />
 					</div>
 					<div className="text-xl text-center">--- Or ---</div>
 					<div className="py-2">

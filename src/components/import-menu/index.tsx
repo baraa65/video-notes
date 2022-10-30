@@ -17,7 +17,8 @@ function ImportMenu() {
 
 				let notes = JSON.parse(content)
 
-				setNotes(notes)
+				if (Array.isArray(notes)) setNotes(notes)
+				else alert('Invalid file content!')
 			}
 		}
 	}
@@ -29,7 +30,13 @@ function ImportMenu() {
 	return (
 		<>
 			<div>
-				<input ref={input} style={{ display: 'none' }} type="file" onChange={handleChange} />
+				<input
+					ref={input}
+					style={{ display: 'none' }}
+					accept=".json"
+					type="file"
+					onChange={handleChange}
+				/>
 				<Button variant="contained" onClick={importFromJson}>
 					Import Notes
 				</Button>
