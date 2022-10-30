@@ -15,6 +15,11 @@ function MainPage() {
 		setNotes((notes) => [note, ...notes])
 	}
 
+	const handleError = () => {
+		alert('Invalid url or file!')
+		setVideoLink('')
+	}
+
 	const context = {
 		time,
 		setTime,
@@ -41,6 +46,7 @@ function MainPage() {
 								link={videoLink}
 								videoRef={videoRef}
 								onTimeUpdate={(time) => setTime(time)}
+								onError={handleError}
 							/>
 						</div>
 					</div>
