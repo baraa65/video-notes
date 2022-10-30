@@ -1,4 +1,4 @@
-import React, { Ref } from 'react'
+import React, { RefObject } from 'react'
 import { Note } from '../../models/notes'
 
 export interface MainContextType {
@@ -6,6 +6,7 @@ export interface MainContextType {
 	videoLink: string
 	time: number
 	notes: Note[]
+	videoRef: RefObject<HTMLVideoElement> | null
 
 	setVideo: (video: File | null) => void
 	setVideoLink: (link: string) => void
@@ -19,6 +20,7 @@ export const MainContext = React.createContext<MainContextType>({
 	videoLink: '',
 	time: 0,
 	notes: [],
+	videoRef: null,
 
 	setVideo(video: File | null) {},
 	setVideoLink(link: string) {},

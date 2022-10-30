@@ -10,6 +10,7 @@ function MainPage() {
 	const [time, setTime] = useState<number>(0)
 	const [notes, setNotes] = useState<Note[]>([])
 	const [videoLink, setVideoLink] = useState('')
+	const videoRef = useRef<HTMLVideoElement>(null)
 
 	const addNote = (note: Note) => {
 		setNotes((notes) => [note, ...notes])
@@ -25,6 +26,7 @@ function MainPage() {
 		setNotes,
 		videoLink,
 		setVideoLink,
+		videoRef,
 	}
 
 	return (
@@ -41,6 +43,7 @@ function MainPage() {
 							<VideoView
 								video={videoFile}
 								link={videoLink}
+								videoRef={videoRef}
 								onTimeUpdate={(time) => setTime(time)}
 							/>
 						</div>

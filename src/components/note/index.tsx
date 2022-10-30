@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Note } from '../../models/notes'
-import { Card, CardContent } from '@mui/material'
+import { Card } from '@mui/material'
+import { secondsToTime } from '../../utils/time'
+import { MainContext } from '../../pages/main/contexts'
 
 interface NoteProps {
 	note: Note
@@ -8,21 +10,17 @@ interface NoteProps {
 }
 
 function NoteCard({ note, isActive }: NoteProps) {
-	const secondsToTime = (num: number) => {
-		let sec_num = Math.floor(num)
-		let hours = Math.floor(sec_num / 3600)
-		let minutes = Math.floor((sec_num - hours * 3600) / 60)
-		let seconds = sec_num - hours * 3600 - minutes * 60
+	const { videoRef } = useContext(MainContext)
 
-		return `${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? '0' + minutes : minutes}:${
-			seconds < 10 ? '0' + seconds : seconds
-		}`
+	const handleClick = (note: Note) => {
+		if (videoRef?.current?.currentTime !== undefined) videoRef.current.currentTime = note.time
 	}
 
 	return (
 		<Card
-			className="relative"
+			className="relative cursor-pointer"
 			style={{ background: isActive ? 'rgb(22 163 74)' : 'rgb(37 99 235)' }}
+			onClick={() => handleClick(note)}
 		>
 			<div className="px-2 pt-1 text-white">{note.text}</div>
 			<div className="flex justify-end p-1">

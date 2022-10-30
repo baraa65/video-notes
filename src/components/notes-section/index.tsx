@@ -14,7 +14,7 @@ function NotesSection() {
 	const isActive = (note: Note) => {
 		const diff = time - note.time
 
-		return diff < note.duration && diff > 0
+		return diff < note.duration && diff >= 0
 	}
 
 	return (
