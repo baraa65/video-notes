@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import { Note } from '../../models/notes'
 import { Card } from '@mui/material'
 import { secondsToTime } from '../../utils/time'
@@ -11,6 +11,11 @@ interface NoteProps {
 
 function NoteCard({ note, isActive }: NoteProps) {
 	const { videoRef } = useContext(MainContext)
+	const card = useRef<HTMLDivElement>(null)
+
+	useEffect(() => {
+		if (isActive) card.current?.scrollIntoView()
+	}, [isActive])
 
 	const handleClick = (note: Note) => {
 		if (videoRef?.current?.currentTime !== undefined) videoRef.current.currentTime = note.time
@@ -18,6 +23,7 @@ function NoteCard({ note, isActive }: NoteProps) {
 
 	return (
 		<Card
+			ref={card}
 			className="relative cursor-pointer"
 			style={{ background: isActive ? 'rgb(22 163 74)' : 'rgb(37 99 235)' }}
 			onClick={() => handleClick(note)}

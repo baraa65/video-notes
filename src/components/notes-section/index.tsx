@@ -20,7 +20,7 @@ function NotesSection() {
 	return (
 		<div className={`h-full w-full bg-slate-300`}>
 			<div className="flex flex-col" style={{ height: '100%' }}>
-				<div className="flex-1 overflow-auto">
+				<div className="flex-1 overflow-auto" style={{ scrollBehavior: 'smooth' }}>
 					{notes.map((note, i) => (
 						<div key={i} className="px-2 pt-2">
 							<NoteCard note={note} isActive={isActive(note)} />
