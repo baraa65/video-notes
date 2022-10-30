@@ -13,6 +13,7 @@
     "@types/node": "^16.18.2",
     "@types/react": "^18.0.23",
     "@types/react-dom": "^18.0.7",
+    "create-react-app": "^5.0.1",
     "etro": "^0.9.1",
     "json-to-xml": "^1.0.4",
     "react": "^18.2.0",
