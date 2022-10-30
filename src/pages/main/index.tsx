@@ -6,7 +6,6 @@ import { Note } from '../../models/notes'
 import { MainContext } from './contexts'
 
 function MainPage() {
-	const [videoFile, setVideo] = useState<File | null>(null)
 	const [time, setTime] = useState<number>(0)
 	const [notes, setNotes] = useState<Note[]>([])
 	const [videoLink, setVideoLink] = useState('')
@@ -17,8 +16,6 @@ function MainPage() {
 	}
 
 	const context = {
-		videoFile,
-		setVideo,
 		time,
 		setTime,
 		notes,
@@ -41,7 +38,6 @@ function MainPage() {
 						</div>
 						<div className="col-span-3">
 							<VideoView
-								video={videoFile}
 								link={videoLink}
 								videoRef={videoRef}
 								onTimeUpdate={(time) => setTime(time)}

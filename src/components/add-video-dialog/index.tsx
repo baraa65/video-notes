@@ -3,9 +3,8 @@ import React, { useContext, useState } from 'react'
 import { Button, Dialog, TextField } from '@mui/material'
 import { MainContext } from '../../pages/main/contexts'
 
-
 function AddVideoDialog() {
-	const { setVideo, setVideoLink } = useContext(MainContext)
+	const { setVideoLink } = useContext(MainContext)
 	const [open, setOpen] = useState(false)
 	const [link, setLink] = useState('')
 
@@ -21,16 +20,15 @@ function AddVideoDialog() {
 		const file = e.target.files?.[0]
 
 		if (file) {
-			setVideoLink('')
-			setLink('')
-			setVideo(file)
+			setVideoLink(URL.createObjectURL(file))
 			handleClose()
 		}
 	}
 
 	const handleDone = () => {
-		setVideo(null)
-		setVideoLink(link)
+		if (link) {
+			setVideoLink(link)
+		}
 		handleClose()
 	}
 
@@ -42,7 +40,7 @@ function AddVideoDialog() {
 			<Dialog open={open} onClose={handleClose}>
 				<div className="p-6">
 					<div className="py-2">
-						<input type="file" accept='.mp4,.mkv' onChange={handleChange} />
+						<input type="file" accept=".mp4,.mkv" onChange={handleChange} />
 					</div>
 					<div className="text-xl text-center">--- Or ---</div>
 					<div className="py-2">
